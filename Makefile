@@ -1,8 +1,8 @@
 CC = g++
 FLAGS = -std=c++11
 
-program: src/*.cpp src/*.h Makefile main.cpp
-	$(CC) $(FLAGS) src/*.h src/*.cpp main.cpp -o program
+program: src/*.cpp src/*.hpp Makefile main.cpp
+	$(CC) $(FLAGS) main.cpp src/*.cpp -o program
 
 run:
 	./program

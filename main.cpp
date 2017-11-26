@@ -1,31 +1,65 @@
 #include <iostream>
-#include "src/graph.h"
+#include <fstream>
+#include <sstream>
+#include <string>
+#include "src/graph.hpp"
 
 using namespace std;
 
 int main() {
-  Graph g1;
+    Graph g1;
 
-  g1.createGraph(0);
-  g1.createGraph(1);
-  g1.createGraph(2);
-  g1.createGraph(3);
+    int numberOfElements;
+    ifstream file("Samples/qg.order100.col");
+    string line;
 
-  g1.createMatrix();
+    while(getline(file, line)) {
+        string mark, edge;
+        int int1, from, to;
+        stringstream ss1(line);
+        while(ss1 >> mark >> edge >> int1) {
+           if(mark == "p") {
+               numberOfElements = int1;
+               for (int i = 0; i < numberOfElements; i++) {
+                 g1.createGraph(i-1);
+               }
+               g1.createMatrix();
+               break;
+           }
+        }
+        stringstream ss2(line);
+        while(ss2 >> mark >> from >> to) {
+            if(mark == "e"){
+                g1.createEdge(from-1, to-1);
+            }
+        }
+    }
 
-  g1.createEdge(0,1);
-  g1.createEdge(0,3);
-  g1.createEdge(1,3);
-  g1.createEdge(1,2);
-  g1.createEdge(2,3);
+    // g1.createEdge(0,9);
+    // g1.createEdge(0,7);
+    // g1.createEdge(1,2);
+    // g1.createEdge(1,4);
+    // g1.createEdge(2,4);
+    // g1.createEdge(3,4);
+    // g1.createEdge(3,5);
+    // g1.createEdge(4,5);
+    // g1.createEdge(4,6);
+    // g1.createEdge(4,8);
+    // g1.createEdge(5,8);
+    // g1.createEdge(5,7);
+    // g1.createEdge(6,7);
+    // g1.createEdge(7,9);
+    // g1.createEdge(7,8);
 
-  //g1.printGraph();
-  g1.colourGraph(0);
+    //g1.printGraph();
+    g1.colourGraph(0);
 
-  cout << "Number of colors used: " << g1.color << endl;
-  for (int i = 0; i < g1.solution.size(); i++) {
-    cout << "Node: " << i << " color: " << g1.solution[i] << endl;
-  }
+    cout << "Number of colors used: " << g1.color << endl;
+    for (int i = 0; i < g1.solution.size(); i++) {
+    cout << "Nodee: " << i << " color: " << g1.solution[i] << endl;
+    }
 
-  return 0;
+    g1.calculateNumGraph();
+
+    return 0;
 }
