@@ -10,7 +10,7 @@ int main() {
     Graph g1;
 
     int numberOfElements;
-    ifstream file("Samples/le450_15a.col");
+    ifstream file("samples/fpsol2.i.2.col");
     string line;
 
     while(getline(file, line)) {
@@ -35,35 +35,16 @@ int main() {
         }
     }
 
-    // g1.createEdge(0,9);
-    // g1.createEdge(0,7);
-    // g1.createEdge(1,2);
-    // g1.createEdge(1,4);
-    // g1.createEdge(2,4);
-    // g1.createEdge(3,4);
-    // g1.createEdge(3,5);
-    // g1.createEdge(4,5);
-    // g1.createEdge(4,6);
-    // g1.createEdge(4,8);
-    // g1.createEdge(5,8);
-    // g1.createEdge(5,7);
-    // g1.createEdge(6,7);
-    // g1.createEdge(7,9);
-    // g1.createEdge(7,8);
-
-    //g1.printGraph();
-    //g1.colourGraph(0);
-
     g1.runAlgorithm();
 
     cout << "Best Solution: " << g1.bestSolution << endl;
-    // for (int i = 0; i < g1.coloredGraph.size(); i++) {
-    //    cout << "Nodee: " << i << " color: " << g1.coloredGraph[i] << endl;
+    // for (int i = 0; i < g1.independentVertices.size(); i++) {
+    //   cout << "Nodee: " << i << " color: " << g1.independentVertices[i] << endl;
     // }
 
     //g1.printGraph();
 
-    g1.calculateNumGraph();
+    //g1.calculateNumGraph();
 
     return 0;
 }

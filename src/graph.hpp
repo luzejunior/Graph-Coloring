@@ -27,10 +27,12 @@ public:
     void colourGraph(int);
     bool canAssignColor(int, int);
     void calculateNumGraph();
-    void getIndependentVertices();
+    void getIndependentVertices(vector<int>);
     void clearColorsSolution();
     void getBestSolution();
     void runAlgorithm();
+    void copySolutionToVector(vector<int>*, vector<int>);
+    void VND(int);
 };
 
 #endif
