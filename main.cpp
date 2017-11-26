@@ -10,7 +10,7 @@ int main() {
     Graph g1;
 
     int numberOfElements;
-    ifstream file("Samples/qg.order100.col");
+    ifstream file("Samples/le450_15a.col");
     string line;
 
     while(getline(file, line)) {
@@ -52,12 +52,16 @@ int main() {
     // g1.createEdge(7,8);
 
     //g1.printGraph();
-    g1.colourGraph(0);
+    //g1.colourGraph(0);
 
-    cout << "Number of colors used: " << g1.color << endl;
-    for (int i = 0; i < g1.solution.size(); i++) {
-    cout << "Nodee: " << i << " color: " << g1.solution[i] << endl;
-    }
+    g1.runAlgorithm();
+
+    cout << "Best Solution: " << g1.bestSolution << endl;
+    // for (int i = 0; i < g1.coloredGraph.size(); i++) {
+    //    cout << "Nodee: " << i << " color: " << g1.coloredGraph[i] << endl;
+    // }
+
+    //g1.printGraph();
 
     g1.calculateNumGraph();
 
