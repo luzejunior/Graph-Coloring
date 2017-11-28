@@ -69,12 +69,12 @@ int main() {
 
     g1.runAlgorithm();
 
-    cout << "Best Solution: " << g1.color << endl;
+    //cout << "Best Solution: " << g1.color << endl;
     // for (int i = 0; i < g1.independentVertices.size(); i++) {
     //   cout << "Nodee: " << i << " color: " << g1.independentVertices[i] << endl;
     // }
 
-    g1.printGraph();
+    //g1.printGraph();
 
     //g1.calculateNumGraph();
 

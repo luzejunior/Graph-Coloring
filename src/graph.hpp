@@ -37,6 +37,11 @@ SOFTWARE.
 
 using namespace std;
 
+struct solution {
+  vector <int> colorGraph;
+  int numberOfColorsUsed = 1;
+};
+
 class Graph{
 public:
     vector <int> nodes;
@@ -49,14 +54,16 @@ public:
     vector <int> bestSolutionColors;
 
     void createMatrix();
+    vector <int> createColorgraph();
     void createGraph(int);
     void printGraph();
     void createEdge(int, int);
-    void colourGraph(int);
-    bool canAssignColor(int, int);
+    void colourGraph(vector <int>*, int, int*);
+    bool canAssignColor(vector <int>* ,int, int);
     void calculateNumGraph();
     void getIndependentVertices(vector<int>);
     void clearColorsSolution();
+    vector <int> sortVector();
     void getBestSolution();
     void runAlgorithm();
     void tryToRemoveColor(int);
