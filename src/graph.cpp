@@ -43,10 +43,13 @@ void Graph::createEdge(int node, int next) {
 }
 
 void Graph::printGraph() {
-    for (int i = 0; i < (*nextNode).size(); i++) {
-        for (int j = 0; j < (*nextNode)[i].size(); j++) {
-            cout << "Node inside: " << (*nextNode)[i][j] << endl;
-        }
+    for (int i = 0; i < this->coloredGraph.size(); i++) {
+    //if ((*nextNode)[i].size() == 1) {
+        cout << "Node inside: " << i << "Color: " << this->coloredGraph[i] << endl;
+      //}
+        //for (int j = 0; j < (*nextNode)[i].size(); j++) {
+        //    cout << "Node inside: " << (*nextNode)[i][j] << endl;
+        //}
     }
 }
 
@@ -125,13 +128,95 @@ void Graph::copySolutionToVector(vector <int> *bsc, vector <int> fromVec) {
     }
 }
 
+void Graph::tryToRemoveColor(int color) {
+  if (color == 0) {
+    return;
+  }
+  int c = color;
+  vector <int> nodesWithColor;
+  cout << "Searching Color: " << c << endl;
+  for(int i = 0; i < this->coloredGraph.size(); i++) {
+    if (this->coloredGraph[i] == c) {
+      nodesWithColor.push_back(i);
+      //cout << "Node inside: " << i << endl;
+    }
+  }
+
+  bool cantAssign = false;
+  for (int j = 0; j<nodesWithColor.size(); j++) {
+    int pontualColor = c-1;
+    while (pontualColor >= 1) {
+      if (canAssignColor(this->coloredGraph[nodesWithColor[j]], pontualColor)) {
+        this->coloredGraph[nodesWithColor[j]] = pontualColor;
+        break;
+      } else {
+        //cantAssign = true;
+        pontualColor--;
+        //break;
+      }
+    }
+    if (pontualColor == 0) {
+      cantAssign = true;
+    }
+  }
+  if (cantAssign == false){
+    this->color--;
+    tryToRemoveColor(--c);
+  } else {
+    tryToRemoveColor(--c);
+  }
+}
+
+void Graph::RemoveColor() {
+  int c = this->color;
+
+  while (c >= 1) {
+    vector <int> nodesWithColor;
+    cout << "Searching Color: " << c << endl;
+    for(int i = 0; i < this->coloredGraph.size(); i++) {
+      if (this->coloredGraph[i] == c) {
+        nodesWithColor.push_back(i);
+        //cout << "Node inside: " << i << endl;
+      }
+    }
+
+    int colorToReplace = c - 1;
+    bool cantAssign = false;
+    for (int j = 0; j<nodesWithColor.size(); j++) {
+      if (canAssignColor(this->coloredGraph[nodesWithColor[j]], colorToReplace)) {
+        break;
+      } else {
+        cantAssign = true;
+      }
+    }
+
+    if (cantAssign == false){
+      cout << "Cor removida: " << c << endl;
+      this->color--;
+      for (int j = 0; j<nodesWithColor.size(); j++) {
+        if (canAssignColor(this->coloredGraph[nodesWithColor[j]], colorToReplace)) {
+          this->coloredGraph[nodesWithColor[j]] = colorToReplace;
+        } else {
+          return;
+        }
+      }
+      c--;
+    } else {
+      c--;
+    }
+
+  }
+}
+
 void Graph::runAlgorithm() {
     colourGraph(0);
-    getIndependentVertices(this->coloredGraph);
-    this->bestSolution = this->color;
-    clearColorsSolution();
-    int valueForInteraction = (this->nodes.size()) * 0.15;
-    VND(valueForInteraction);
+    //tryToRemoveColor(this->color);
+    RemoveColor();
+    //getIndependentVertices(this->coloredGraph);
+    //this->bestSolution = this->color;
+    //clearColorsSolution();
+    //int valueForInteraction = (this->nodes.size()) * 0.15;
+    //VND(valueForInteraction);
 }
 
 void Graph::VND(int timesVNDRuns) {
@@ -160,7 +245,8 @@ void Graph::VND(int timesVNDRuns) {
             this->bestSolution = pontualBestSolution;
             copySolutionToVector(&bestSolutionColors, pontualBestSolutionColors);
         }
-        this->nodes.erase(this->nodes.begin()+(bestIndependentPosition));
+        this->nodes.erase(this->nodes.begin() + (bestIndependentPosition));
+        (*nextNode)[bestIndependentPosition].erase((*nextNode)[bestIndependentPosition].begin(), (*nextNode)[bestIndependentPosition].end());
         getIndependentVertices(pontualBestSolutionColors);
         counter++;
     }

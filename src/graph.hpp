@@ -59,6 +59,8 @@ public:
     void clearColorsSolution();
     void getBestSolution();
     void runAlgorithm();
+    void tryToRemoveColor(int);
+    void RemoveColor();
     void copySolutionToVector(vector<int>*, vector<int>);
     void VND(int);
 };

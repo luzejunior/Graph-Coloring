@@ -38,7 +38,11 @@ int main() {
     Graph g1;
 
     int numberOfElements;
-    ifstream file("samples/fpsol2.i.2.col");
+    ifstream file("samples/le450_15a.col");
+    //latin_square_10.col
+    //le450_15a.col
+    //1-Insertions_4.col
+    //qg.order30.col
     string line;
 
     while(getline(file, line)) {
@@ -65,12 +69,12 @@ int main() {
 
     g1.runAlgorithm();
 
-    cout << "Best Solution: " << g1.bestSolution << endl;
+    cout << "Best Solution: " << g1.color << endl;
     // for (int i = 0; i < g1.independentVertices.size(); i++) {
     //   cout << "Nodee: " << i << " color: " << g1.independentVertices[i] << endl;
     // }
 
-    //g1.printGraph();
+    g1.printGraph();
 
     //g1.calculateNumGraph();
 
