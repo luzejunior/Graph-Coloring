@@ -66,7 +66,9 @@ public:
     vector <int> sortVector();
     void getBestSolution();
     void runAlgorithm();
-    void tryToRemoveColor(int);
+    void tryToRemoveColor(Solution*, int);
+    void selectSolution(Solution*, double);
+    void GRASP(Solution*, int, double); 
     void RemoveColor(Solution*);
     void copySolutionToVector(vector<int>*, vector<int>);
     void VND(int);
