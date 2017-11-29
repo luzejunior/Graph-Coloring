@@ -202,14 +202,14 @@ void Graph::tryToRemoveColor(int color) {
   }
 }
 
-void Graph::RemoveColor() {
-  int c = this->color;
+void Graph::RemoveColor(Solution *s) {
+  int c = s->numberOfColorsUsed;
 
   while (c >= 1) {
     vector <int> nodesWithColor;
     cout << "Searching Color: " << c << endl;
-    for(int i = 0; i < this->coloredGraph.size(); i++) {
-      if (this->coloredGraph[i] == c) {
+    for(int i = 0; i < s->colorGraph.size(); i++) {
+      if (s->colorGraph[i] == c) {
         nodesWithColor.push_back(i);
         //cout << "Node inside: " << i << endl;
       }
@@ -218,22 +218,22 @@ void Graph::RemoveColor() {
     int colorToReplace = c - 1;
     bool cantAssign = false;
     for (int j = 0; j<nodesWithColor.size(); j++) {
-      // if (canAssignColor(this->coloredGraph[nodesWithColor[j]], colorToReplace)) {
-      //   break;
-      // } else {
-      //   cantAssign = true;
-      // }
+      if (canAssignColor(&s->colorGraph,s->colorGraph[nodesWithColor[j]], colorToReplace)) {
+        break;
+      } else {
+        cantAssign = true;
+      }
     }
 
     if (cantAssign == false){
       cout << "Cor removida: " << c << endl;
-      this->color--;
+      s->numberOfColorsUsed--;
       for (int j = 0; j<nodesWithColor.size(); j++) {
-        // if (canAssignColor(this->coloredGraph[nodesWithColor[j]], colorToReplace)) {
-        //   this->coloredGraph[nodesWithColor[j]] = colorToReplace;
-        // } else {
-        //   return;
-        // }
+        if (canAssignColor(&s->colorGraph, s->colorGraph[nodesWithColor[j]], colorToReplace)) {
+          s->colorGraph[nodesWithColor[j]] = colorToReplace;
+        } else {
+          return;
+        }
       }
       c--;
     } else {
@@ -244,14 +244,21 @@ void Graph::RemoveColor() {
 }
 
 void Graph::runAlgorithm() {
-  solution s1;
+  Solution s1, s2;
   s1.colorGraph = createColorgraph();
   colourGraph(&s1.colorGraph, 0, &s1.numberOfColorsUsed);
 
   for (int i = 0; i < s1.colorGraph.size(); i++) {
     cout << "Node inside: " << i << "Color: " << s1.colorGraph[i] << endl;
   }
+  s2 = s1;
+  RemoveColor(&s2);
 
+  for (int i = 0; i < s2.colorGraph.size(); i++) {
+    cout << "Node inside: " << i << "Color: " << s2.colorGraph[i] << endl;
+  }
+
+  cout << "Best Solution: " << s2.numberOfColorsUsed << endl;
   cout << "Best Solution: " << s1.numberOfColorsUsed << endl;
   //tryToRemoveColor(this->color);
   //RemoveColor();

@@ -37,7 +37,7 @@ SOFTWARE.
 
 using namespace std;
 
-struct solution {
+struct Solution {
   vector <int> colorGraph;
   int numberOfColorsUsed = 1;
 };
@@ -67,7 +67,7 @@ public:
     void getBestSolution();
     void runAlgorithm();
     void tryToRemoveColor(int);
-    void RemoveColor();
+    void RemoveColor(Solution*);
     void copySolutionToVector(vector<int>*, vector<int>);
     void VND(int);
 };
