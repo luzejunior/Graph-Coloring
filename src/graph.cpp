@@ -116,7 +116,7 @@ void Graph::tryToRemoveColor(Solution *s, int color) {
   int c = color;
   vector <int> nodesWithColor;
   //cout << "Searching Color: " << c << endl;
-  for(int i = 0; i < s->colorGraph.size(); i++) {
+  for (int i = 0; i < s->colorGraph.size(); i++) {
     if (s->colorGraph[i] == c) {
       nodesWithColor.push_back(i);
     }
@@ -138,7 +138,7 @@ void Graph::tryToRemoveColor(Solution *s, int color) {
     }
   }
 
-  if (cantAssign == false){
+  if (cantAssign == false) {
     s->numberOfColorsUsed--;
     tryToRemoveColor(s, --c);
   } else {
@@ -152,7 +152,7 @@ void Graph::RemoveColor(Solution *s) {
   while (c >= 1) {
     vector <int> nodesWithColor;
     //cout << "Searching Color: " << c << endl;
-    for(int i = 0; i < s->colorGraph.size(); i++) {
+    for (int i = 0; i < s->colorGraph.size(); i++) {
       if (s->colorGraph[i] == c) {
         nodesWithColor.push_back(i);
         //cout << "Node inside: " << i << endl;
@@ -173,7 +173,7 @@ void Graph::RemoveColor(Solution *s) {
       }
     }
 
-    if (cantAssign == false){
+    if (cantAssign == false) {
       cout << "Cor removida: " << c << endl;
       s->numberOfColorsUsed--;
 
@@ -204,7 +204,7 @@ void Graph::selectSolution(Solution *s, double alpha) {
   colourGraph(&s->colorGraph, LCR[randomIndex], &s->numberOfColorsUsed);
 }
 
-void Graph::GRASP (Solution *s, int GRASPmax, double alpha) {
+void Graph::GRASP(Solution *s, int GRASPmax, double alpha) {
   int pontualBestSolution = 999999;
   int interactions = GRASPmax;
 
