@@ -40,6 +40,7 @@ using namespace std;
 struct Solution {
   vector <int> colorGraph;
   int numberOfColorsUsed = 1;
+  int index;
 };
 
 class Graph{
@@ -68,7 +69,7 @@ public:
     void runAlgorithm();
     void tryToRemoveColor(Solution*, int);
     void selectSolution(Solution*, double);
-    void GRASP(Solution*, int, double); 
+    void GRASP(Solution*, int, double);
     void RemoveColor(Solution*);
     void copySolutionToVector(vector<int>*, vector<int>);
     void VND(int);

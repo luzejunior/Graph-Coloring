@@ -38,11 +38,13 @@ int main() {
     Graph g1;
 
     int numberOfElements;
-    ifstream file("samples/le450_15a.col");
-    //latin_square_10.col
-    //le450_15a.col
-    //1-Insertions_4.col
-    //qg.order30.col
+    ifstream file("samples/fpsol2.i.1.col");
+    //latin_square_10.col - 100 -- 168
+    //le450_15a.col - 15 -- 15
+    //1-Insertions_4.col - 4 -- 3
+    //qg.order30.col - 30 -- 31
+    //fpsol2.i.1.col - 65 -- 39
+
     string line;
 
     while(getline(file, line)) {
