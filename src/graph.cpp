@@ -30,7 +30,6 @@ SOFTWARE.
 
 void Graph::createGraph(int node) {
   this->nodes.push_back(node);
-  this->coloredGraph.push_back(0);
 }
 
 vector <int> Graph::createColorgraph() {
@@ -51,25 +50,6 @@ void Graph::createEdge(int node, int next) {
   (*nextNode)[node].push_back(next);
   (*nextNode)[next].push_back(node);
 }
-//
-// void Graph::printGraph() {
-//   for (int i = 0; i < this->coloredGraph.size(); i++) {
-//   //if ((*nextNode)[i].size() == 1) {
-//       cout << "Node inside: " << i << "Color: " << this->coloredGraph[i] << endl;
-//     //}
-//       //for (int j = 0; j < (*nextNode)[i].size(); j++) {
-//       //    cout << "Node inside: " << (*nextNode)[i][j] << endl;
-//       //}
-//   }
-// }
-
-// void Graph::calculateNumGraph() {
-//   int count = 0;
-//   for (int i = 0; i < (*nextNode).size(); i++) {
-//     count += (*nextNode)[i].size();
-//   }
-//   cout << count << endl;
-// }
 
 void Graph::colourGraph(vector <int> *vec, int node, int *colors) {
   int c = 1;
@@ -103,40 +83,7 @@ bool Graph::canAssignColor(vector <int> *vec, int node, int color) {
   return true;
 }
 
-// void Graph::getIndependentVertices(vector<int> cvector) {
-//   if (!this->independentVertices.empty()) {
-//     this->independentVertices.clear();
-//   }
-//   for (int i = 0; i < cvector.size(); i++) {
-//       if (cvector[i] == 1) {
-//         this->independentVertices.push_back(i);
-//       }
-//   }
-// }
-//
-// void Graph::clearColorsSolution() {
-//   for (int i = 0; i < this->coloredGraph.size(); i++) {
-//     this->coloredGraph[i] = 0;
-//   }
-//   this->color = 1;
-// }
-//
-// void Graph::getBestSolution() {
-//   for (int i = 0; i < this->solutions.size(); i++)  {
-//     if (this->solutions[i] < bestSolution) {
-//         bestSolution = this->solutions[i];
-//     }
-//   }
-// }
-//
-// void Graph::copySolutionToVector(vector <int> *bsc, vector <int> fromVec) {
-//   if (!bsc->empty()) {
-//     bsc->clear();
-//   }
-//   for (int i = 0; i < fromVec.size(); i++) {
-//     bsc->push_back(fromVec[i]);
-//   }
-// }
+
 
 vector <int> Graph::sortVector() {
   vector <int> nodeIndices;
@@ -145,8 +92,6 @@ vector <int> Graph::sortVector() {
   for (int i = 0; i < (*nextNode).size(); i++) {
     nextNodeCopy.push_back((*nextNode)[i].size());
   }
-
-  //cout << nextNodeCopy.size() << endl;
 
   while (nodeIndices.size() < nextNodeCopy.size()) {
     int aux = 0;
@@ -170,7 +115,7 @@ void Graph::tryToRemoveColor(Solution *s, int color) {
 
   int c = color;
   vector <int> nodesWithColor;
-  cout << "Searching Color: " << c << endl;
+  //cout << "Searching Color: " << c << endl;
   for(int i = 0; i < s->colorGraph.size(); i++) {
     if (s->colorGraph[i] == c) {
       nodesWithColor.push_back(i);
@@ -206,7 +151,7 @@ void Graph::RemoveColor(Solution *s) {
 
   while (c >= 1) {
     vector <int> nodesWithColor;
-    cout << "Searching Color: " << c << endl;
+    //cout << "Searching Color: " << c << endl;
     for(int i = 0; i < s->colorGraph.size(); i++) {
       if (s->colorGraph[i] == c) {
         nodesWithColor.push_back(i);
@@ -231,13 +176,7 @@ void Graph::RemoveColor(Solution *s) {
     if (cantAssign == false){
       cout << "Cor removida: " << c << endl;
       s->numberOfColorsUsed--;
-      // for (int j = 0; j<nodesWithColor.size(); j++) {
-      //   if (canAssignColor(&s->colorGraph, s->colorGraph[nodesWithColor[j]], colorToReplace)) {
-      //     s->colorGraph[nodesWithColor[j]] = colorToReplace;
-      //   } else {
-      //     return;
-      //   }
-      // }
+
       c--;
     } else {
       c--;
@@ -273,7 +212,7 @@ void Graph::GRASP (Solution *s, int GRASPmax, double alpha) {
     Solution graspSolution;
     graspSolution.colorGraph = createColorgraph();
     selectSolution(&graspSolution, alpha);
-    cout << "Solution after Remove: " << graspSolution.numberOfColorsUsed << endl;
+    //cout << "Solution after Remove: " << graspSolution.numberOfColorsUsed << endl;
     RemoveColor(&graspSolution);
     if (graspSolution.numberOfColorsUsed < pontualBestSolution) {
       *s = graspSolution;
@@ -292,82 +231,10 @@ void Graph::runAlgorithm() {
   //colourGraph(&s1.colorGraph, 37, &s1.numberOfColorsUsed);
   //RemoveColor(&s1);
   //tryToRemoveColor(&s1, s1.numberOfColorsUsed);
-
   // for (int i = 0; i < s1.colorGraph.size(); i++) {
   //   cout << "Node inside: " << i << "Color: " << s1.colorGraph[i] << endl;
   // }
-  //
+
   cout << "Best Solution: " << s1.numberOfColorsUsed << endl;
-  cout << "Best Solution Index: " << s1.index << endl;
-
-
-
-
-
-
-
-  //
-  // s1.colorGraph = createColorgraph();
-  // colourGraph(&s1.colorGraph, 0, &s1.numberOfColorsUsed);
-  //
-  // // for (int i = 0; i < s1.colorGraph.size(); i++) {
-  // //   cout << "Node inside: " << i << "Color: " << s1.colorGraph[i] << endl;
-  // // }
-  // s2 = s1;
-  // s3 = s1;
-  //
-  // RemoveColor(&s2);
-  // tryToRemoveColor(&s3, s3.numberOfColorsUsed);
-  //
-  // // for (int i = 0; i < s2.colorGraph.size(); i++) {
-  // //   cout << "Node inside: " << i << "Color: " << s2.colorGraph[i] << endl;
-  // // }
-  //
-  // cout << "Best Solution: " << s2.numberOfColorsUsed << endl;
-  // cout << "Best Solution: " << s3.numberOfColorsUsed << endl;
-  // //tryToRemoveColor(this->color);
-  // //RemoveColor();
-  // vector <int> sortedVector = sortVector();
-  // // for (int i = 0; i < sortedVector.size(); i++) {
-  // //   cout << "Node inside: " << sortedVector[i] << " size: " << (*nextNode)[sortedVector[i]].size() << endl;
-  // // }
-  // //getIndependentVertices(this->coloredGraph);
-  // //this->bestSolution = this->color;
-  // //clearColorsSolution();
-  // //int valueForInteraction = (this->nodes.size()) * 0.15;
-  // //VND(valueForInteraction);
+  //cout << "Best Solution Index: " << s1.index << endl;
 }
-
-// void Graph::VND(int timesVNDRuns) {
-//   int counter = 0;
-//   while (counter < timesVNDRuns) {
-//     int pontualBestSolution = 99999999;
-//     vector <int> pontualBestSolutionColors;
-//     int bestIndependentPosition = 0;
-//     for (int i = 0; i < this->independentVertices.size(); i++) {
-//       cout << "Starting search on independent vertice: " << this->independentVertices[i] << endl;
-//       colourGraph(&coloredGraph, this->independentVertices[i], &color);
-//       cout << "Best Solution in this case: " << this->color << endl;
-//       if (this->color < pontualBestSolution) {
-//         bestIndependentPosition = this->independentVertices[i];
-//         pontualBestSolution = this->color;
-//         if (!pontualBestSolutionColors.empty()) {
-//           pontualBestSolutionColors.clear();
-//         }
-//         for (int i = 0; i < this->coloredGraph.size(); i++) {
-//           pontualBestSolutionColors.push_back(this->coloredGraph[i]);
-//         }
-//       }
-//       clearColorsSolution();
-//     }
-//     if (pontualBestSolution < this->bestSolution) {
-//       this->bestSolution = pontualBestSolution;
-//       copySolutionToVector(&bestSolutionColors, pontualBestSolutionColors);
-//     }
-//     this->nodes.erase(this->nodes.begin() + (bestIndependentPosition));
-//     (*nextNode)[bestIndependentPosition].erase((*nextNode)[bestIndependentPosition].begin(), (*nextNode)[bestIndependentPosition].end());
-//     getIndependentVertices(pontualBestSolutionColors);
-//     counter++;
-//   }
-//
-// }

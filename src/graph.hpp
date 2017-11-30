@@ -47,32 +47,20 @@ class Graph{
 public:
     vector <int> nodes;
     vector <vector <int>> *nextNode;
-    vector <int> coloredGraph;
-    vector <int> independentVertices;
-    vector <int> solutions;
-    int color = 1;
-    int bestSolution = 9999999;
-    vector <int> bestSolutionColors;
 
-    void createMatrix();
-    vector <int> createColorgraph();
     void createGraph(int);
-    void printGraph();
+    vector <int> createColorgraph();
+    void createMatrix();
     void createEdge(int, int);
     void colourGraph(vector <int>*, int, int*);
     bool canAssignColor(vector <int>* ,int, int);
-    void calculateNumGraph();
-    void getIndependentVertices(vector<int>);
-    void clearColorsSolution();
     vector <int> sortVector();
-    void getBestSolution();
-    void runAlgorithm();
     void tryToRemoveColor(Solution*, int);
+    void RemoveColor(Solution*);
     void selectSolution(Solution*, double);
     void GRASP(Solution*, int, double);
-    void RemoveColor(Solution*);
-    void copySolutionToVector(vector<int>*, vector<int>);
-    void VND(int);
+    void runAlgorithm();
+
 };
 
 #endif
