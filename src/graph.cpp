@@ -146,7 +146,7 @@ void Graph::tryToRemoveColor(Solution *s, int color) {
   }
 }
 
-void Graph::RemoveColor(Solution *s) {
+void Graph::LocalSearch(Solution *s) {
   int c = s->numberOfColorsUsed;
 
   while (c >= 1) {
@@ -213,7 +213,7 @@ void Graph::GRASP(Solution *s, int GRASPmax, double alpha) {
     graspSolution.colorGraph = createColorgraph();
     selectSolution(&graspSolution, alpha);
     //cout << "Solution after Remove: " << graspSolution.numberOfColorsUsed << endl;
-    RemoveColor(&graspSolution);
+  LocalSearch(&graspSolution);
     if (graspSolution.numberOfColorsUsed < pontualBestSolution) {
       *s = graspSolution;
       pontualBestSolution = graspSolution.numberOfColorsUsed;

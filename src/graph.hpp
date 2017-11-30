@@ -56,7 +56,7 @@ public:
     bool canAssignColor(vector <int>* ,int, int);
     vector <int> sortVector();
     void tryToRemoveColor(Solution*, int);
-    void RemoveColor(Solution*);
+    void LocalSearch(Solution*);
     void selectSolution(Solution*, double);
     void GRASP(Solution*, int, double);
     void runAlgorithm();
